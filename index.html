@@ -25,15 +25,23 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
     #container{
       display: none;
     }
-    small{
-      font: 2vh 'arial black';
-    }
     .button{
       margin-top: 2vh;
       font: 2vw 'arial black';
       height: 5vh;
       width: 15vw;
       outline: none;
+      animation: flicker 0.5s alternate infinite;
+    }
+    @keyframes flicker{
+      from{
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      to{
+        transform: scale(1.2);
+        opacity: 1;
+      }
     }
     .button:hover, 
     .list:hover, 
@@ -42,6 +50,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
     {
       user-select: none;
       cursor: pointer;
+      animation-play-state: paused;
     }
     .list{
       height: 5vh;
@@ -67,6 +76,10 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
       font: 10vh 'arial black';
       margin-top: 35vh;
     }
+    small{
+      font: 2vh 'arial black';
+      animation: flash 1s ease-in-out alternate infinite;
+    }
     @keyframes flash{
       from{opacity: 100}
       to{opacity: 0}
@@ -77,7 +90,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         <source src = "music.mp3" type="audio/mpeg"> 
     </audio>
     <section id = "container">
-      <button class = "button" height = "5vh" onClick = "startSort()">START</button>
+      <button class = "button" id = "button" height = "5vh" onClick = "startSort()">START</button>
       <label>Algorithm: </label>
       <select class = "list" id = "algorithm">
         <option value="1">Bubble Sort</option>
@@ -93,7 +106,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         <option value="10">Monkey Sort</option>
       </select>
       <label>Entities: </label>
-      <input class = "text" step = "10" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "1000" min = "0"  onKeyDown = "return false">
+      <input class = "text" step = "10" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "1000" min = "10"  onChange = "randomize()" onKeyDown = "return false">
       <label>Speed: </label>
       <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
     </section>

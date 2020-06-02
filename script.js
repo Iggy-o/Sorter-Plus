@@ -6,32 +6,34 @@ Github: https://github.com/Iggy-o
 Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 */
 
+//The fllowing code is specifically for the title page
 let titleOn = true;
-let flashTime = 1
 window.onclick = function() {
   if (titleOn === true) {
     titleOn = false;
-    document.getElementById("container").style.display = "inline-block"
-    prompt = document.getElementById("prompt")
-    prompt.style.animation = `flash ${flashTime}s ease-in-out alternate infinite`
-    prompt.style.fontSize = "4vh"
-    prompt.innerHTML = "Choose Your Settings<br>And Select Start"
+    prompt = document.getElementById("prompt");
+    prompt.style.fontSize = "4vh";
+    prompt.style.display = "none";
+    document.getElementById("prompt").innerHTML = "Please let the sorting finish<br>(Hint: You can speed it up with the slider)";
+    document.getElementById("container").style.display = "inline-block";
+    randomize();
   }
 }
 
-audio = document.getElementById("music")
-audio.play()
-audio.volume = 0.25
+//This function manages the audio
+audio();
+function audio() {
+  audio = document.getElementById("music")
+  audio.play();
+  audio.volume = 0.25;
+}
 
-//These are global variables that must be initialized
+//These are variables that must be initialized globally
 let speed, mode, arrlength, barWidth;
-let arr = []
-let start, checkOn = false
-let turnOn = true
-let ready = true
-let pauseTime = 1000
-let compensate = window.innerHeight*0.1
-let minHeight = 50 * (window.innerHeight/1000)
+let arr = [];
+let sortStart = false
+let inputReady = true
+let randomized = false
 let modes = {
   1: bubbleSort,
   2: selectionSort,
@@ -46,67 +48,75 @@ let modes = {
   11: monkeySort
 }
 
+//This is the function called by HTML elements to start the sort
+let hintOn = true
+let compensate = window.innerHeight*0.1
+let minHeight = 50 * (window.innerHeight/1000)
+
 async function startSort() {
-  document.getElementById("prompt").style.display = "none"
-  if (ready == true) {
-    ready = false
+  if (inputReady == true) {
+    document.getElementById("button").style.animationIterationCount = "0"
     mode = document.getElementById("algorithm").value
-    arrlength = document.getElementById("bars").value
-    barWidth = window.innerWidth/arrlength
-    arr = []
-    for(let i = 0; i < arrlength; i++) {
-      arr.push(new bar)
-      function bar() {
-        this.color = "black"
-        this.height = Math.round(Math.random()*(window.innerHeight - compensate)+minHeight);
-      }
+    sortStart = true
+    if(randomized == false){
+      randomize()
     }
-    setTimeout(function(){start = true}, pauseTime)
+    inputReady = false
+    randomized = false
   }
-  else{
+  else if(hintOn == true){
+    hintOn = false;
     document.getElementById("prompt").style.display = "inline-block";
-    document.getElementById("prompt").innerHTML = "Please let the sorting finish<br>(Hint: You can speed it up with the slider)"
-    if (turnOn == true) {
-      turnOn = false
-      setTimeout(function(){
-        document.getElementById("prompt").style.display = "none";
-        turnOn = true
-      }, (flashTime*4 + 1)*1000)
+    setTimeout(function(){
+      document.getElementById("prompt").style.display = "none";
+    }, 5000)
+  }
+}
+function randomize() {
+  if (inputReady == true) {
+    randomized = true
+    arrlength = document.getElementById("bars").value;
+    barWidth = window.innerWidth/arrlength;
+    arr = [];
+    for(let i = 0; i < arrlength; i++) {
+      arr.push(new bar);
+      function bar() {
+        this.color = "black";
+        this.height = Math.round(Math.random()*(window.innerHeight - compensate - 35)+minHeight);
+      }
     }
   }
 }
 
+
+//Using Proceesing JS, I create and update a canvas the size of the screen with the bars
 function setup(){
   noStroke();
   createCanvas(window.innerWidth, window.innerHeight);
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  barWidth = windowWidth/arrlength
-  compensate = window.innerHeight*0.1
-  minHeight = 50 * (window.innerHeight/1000)
+  barWidth = windowWidth/arrlength;
+  compensate = window.innerHeight*0.1;
+  minHeight = 50 * (window.innerHeight/1000);
 }
 function draw(){
-  speed = document.getElementById("myRange").value
+  speed = document.getElementById("myRange").value;
   background("white");
   let x = 0;
-  let color = 0
+  let color = 0;
   for(let i = 0; i < arr.length; i++){
     let p = arr[i];
     if ((p.color) != "green" && (p.color) != "red"){
-      p.color = (color += 200/arrlength)
+      p.color = (color += 200/arrlength);
     }
     fill(p.color);
     rect(x, windowHeight - p.height - 35, barWidth, p.height);
-    x += barWidth
+    x += barWidth;
   }
-  if (start == true){
-    modes[mode]()
-    start = false
-  }
-  if (checkOn == true) {
-    check()
-    checkOn = false
+  if (sortStart == true){
+    modes[mode]();
+    sortStart = false;
   }
 } 
 
@@ -119,7 +129,7 @@ async function bubbleSort() {
       }
     }
   }
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function selectionSort() {
   for (let j = 0; j < arr.length; j++) {
@@ -133,7 +143,7 @@ async function selectionSort() {
     }
     await swap(maxPos, arr.length-j-1)
   }
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function quickSort() {
   await quickSorting(0, arr.length - 1)
@@ -157,7 +167,7 @@ async function quickSort() {
       return pivotIndex
     }
   }
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function insertionSort() {
   for (let j = 0; j < arr.length - 1; j++) {
@@ -167,7 +177,7 @@ async function insertionSort() {
       }
     }
   }
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function mergeSort() {
   await mergeSorting(0, arr.length + 1)
@@ -189,55 +199,56 @@ async function mergeSort() {
       }
     }
   }
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function heapSort() {
   alert("Not Ready Yet")
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function bucketSort() {
   alert("Not Ready Yet")
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function cycleSort() {
   alert("Not Ready Yet")
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function radixSort() {
   alert("Not Ready Yet")
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function combSort() {
   alert("Not Ready Yet")
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 async function monkeySort() {
   alert("Not Ready Yet")
-  setTimeout(function(){checkOn = true}, pauseTime)
+  check()
 }
 
 
-//
+//These are the functions frequently called on in the sorting algorithms
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 async function swap(a, b){
-  arr[a].color = "green"
-  arr[b].color = "red"
-  await sleep(speed)
+  arr[a].color = "green";
+  arr[b].color = "red";
+  await sleep(speed);
   let temp = arr[a];
   arr[a]= arr[b];
   arr[b]= temp;
-  arr[a].color = "black"
-  arr[b].color = "black"
+  arr[a].color = "black";
+  arr[b].color = "black";
 }
 
+let pauseTime = 1000;
 async function check() {
+  await sleep(pauseTime);
   for (let i = 0; i < arr.length; i++){
-    arr[i].color = "green"
-    await sleep(speed/arrlength)
-    arr[i].color = "black"
+    arr[i].color = "green";
+    await sleep(speed/arrlength);
+    arr[i].color = "black";
   }
-  ready = true
+  inputReady = true;
 }
