@@ -1,0 +1,62 @@
+<!--
+Ighoise Odigie
+May, 28 2020
+Youtube: https://www.youtube.com/channel/UCud4cJjtCjEwKpynPz-nNaQ?
+Github: https://github.com/Iggy-o
+Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sorter Plus</title>
+    
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      outline: none;
+    }
+    .button{
+      height: 5vh;
+      width: 15vw;
+      margin-left: 5vw;
+    }
+    .list{
+      height: 5vh;
+      width: 20vw;
+      margin-left: 5vw;
+    }
+    .text{
+      height: 5vh;
+      width: 5vw;
+      margin-left: 5vw;
+    }
+    .slider{
+      position: absolute;
+      top: 1vh;
+      width: 12.5vw;
+      margin-left: 5vw;
+      
+    }
+  </style>
+  <body>
+    <button class = "button" onClick = "startSort()">Start</button>
+    <select class = "list" id = "algorithm">
+      <option value="1">Bubble Sort</option>
+      <option value="2">Selection Sort</option>
+      <option value="3">Quick Sort</option>
+      <option value="4">Insertion Sort</option>
+      <option value="5">Merge Sort</option>
+    </select>
+    <input class = "text" value = "100" type="text" id="bars" name="bars">
+    <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
