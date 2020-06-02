@@ -6,6 +6,9 @@ Github: https://github.com/Iggy-o
 Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 */
 
+audio = document.getElementById("music")
+audio.play()
+audio.volume = 0.25
 //These are global variables that must be initialized
 let speed, mode, arrlength, barWidth;
 let arr = []
@@ -48,7 +51,6 @@ async function startSort() {
     alert("Please let the sorting finish\n(Note: You can speed it up with the slider)")
   }
 }
-
 
 function setup(){
   noStroke();
