@@ -14,9 +14,10 @@ audio.volume = 0.25
 let speed, mode, arrlength, barWidth;
 let arr = []
 let start, checkOn = false
+let turnOn = true
 let ready = true
 let pauseTime = 1000
-let compensate = window.innerHeight*0.05 + 10
+let compensate = window.innerHeight*0.1
 let modes = {
   1: bubbleSort,
   2: selectionSort,
@@ -51,7 +52,15 @@ async function startSort() {
     setTimeout(function(){start = true}, pauseTime)
   }
   else{
-    alert("Please let the sorting finish\n(Note: You can speed it up with the slider)")
+    document.getElementById("prompt").style.display = "inline-block";
+    document.getElementById("prompt").innerHTML = "Please let the sorting finish<br>(Hint: You can speed it up with the slider)"
+    if (turnOn == true) {
+      turnOn = false
+      setTimeout(function(){
+        document.getElementById("prompt").style.display = "none";
+        turnOn = true
+      }, 4000)
+    }
   }
 }
 
@@ -70,7 +79,7 @@ function draw(){
       p.color = (color += 200/arrlength)
     }
     fill(p.color);
-    rect(x, p.y - p.height - compensate, p.width, p.height);
+    rect(x, p.y - p.height - 35, p.width, p.height);
     x += barWidth
   }
   if (start == true){
