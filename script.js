@@ -6,6 +6,18 @@ Github: https://github.com/Iggy-o
 Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 */
 
+let titleOn = true;
+window.onclick = function() {
+  if (titleOn === true) {
+    titleOn = false;
+    document.getElementById("container").style.display = "inline-block"
+    prompt = document.getElementById("prompt")
+    prompt.style.animation = "flash 3s ease-in-out alternate infinite"
+    prompt.style.fontSize = "4vh"
+    prompt.innerHTML = "Choose Your Settings<br>And Select Start"
+  }
+}
+
 audio = document.getElementById("music")
 audio.play()
 audio.volume = 0.25
@@ -18,7 +30,7 @@ let turnOn = true
 let ready = true
 let pauseTime = 1000
 let compensate = window.innerHeight*0.1
-let minHeight = 10
+let minHeight = 50 * (window.innerHeight/1000)
 let modes = {
   1: bubbleSort,
   2: selectionSort,
