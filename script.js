@@ -18,6 +18,7 @@ let turnOn = true
 let ready = true
 let pauseTime = 1000
 let compensate = window.innerHeight*0.1
+let minHeight = 10
 let modes = {
   1: bubbleSort,
   2: selectionSort,
@@ -45,7 +46,7 @@ async function startSort() {
       function bar() {
         this.color = "black"
         this.y = window.innerHeight
-        this.height = Math.round(Math.random()*(window.innerHeight - compensate)+2);
+        this.height = Math.round(Math.random()*(window.innerHeight - compensate)+minHeight);
         this.width = barWidth;
       }
     }

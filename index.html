@@ -29,19 +29,25 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
       font: 3vh 'arial black';
       height: 5vh;
       width: 15vw;
-      border-radius: 200px;
       outline: none;
     }
-    .botton:hover{
+    .button:hover, 
+    .list:hover, 
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=range]::-webkit-slider-thumb
+    {
+      user-select: none;
       cursor: pointer;
     }
     .list{
       height: 5vh;
       width: 20vw;
+      font-family: 'arial black';
     }
     .text{
       height: 4vh;
-      width: 5vw;
+      width: 8vw;
+      font-family: 'arial black';
     }
     .slider{
       margin-top: 2vh;
@@ -81,7 +87,7 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
       <option value="5">Merge Sort</option>
     </select>
     <label>Entities: </label>
-    <input class = "text" value = "100" type="text" id="bars" name="bars" autocomplete="off">
+    <input class = "text" step = "10" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "1000" min = "0"  onKeyDown = "return false">
     <label>Speed: </label>
     <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
     <p id = "prompt">Choose Your Settings<br>and select start</p>
