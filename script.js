@@ -7,12 +7,13 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 */
 
 let titleOn = true;
+let flashTime = 1
 window.onclick = function() {
   if (titleOn === true) {
     titleOn = false;
     document.getElementById("container").style.display = "inline-block"
     prompt = document.getElementById("prompt")
-    prompt.style.animation = "flash 3s ease-in-out alternate infinite"
+    prompt.style.animation = `flash ${flashTime}s ease-in-out alternate infinite`
     prompt.style.fontSize = "4vh"
     prompt.innerHTML = "Choose Your Settings<br>And Select Start"
   }
@@ -72,7 +73,7 @@ async function startSort() {
       setTimeout(function(){
         document.getElementById("prompt").style.display = "none";
         turnOn = true
-      }, 4000)
+      }, (flashTime*4 + 1)*1000)
     }
   }
 }
