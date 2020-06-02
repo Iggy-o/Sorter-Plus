@@ -21,28 +21,41 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
       padding: 0;
       overflow: hidden;
       outline: none;
+      text-align: center;
     }
     .button{
       height: 5vh;
       width: 15vw;
-      margin-left: 5vw;
+    }
+    .bottun:hover{
+      cursor: pointer;
     }
     .list{
       height: 5vh;
       width: 20vw;
-      margin-left: 5vw;
     }
     .text{
-      height: 5vh;
+      height: 4vh;
       width: 5vw;
-      margin-left: 5vw;
     }
     .slider{
-      position: absolute;
-      top: 1vh;
+      margin-top: 2vh;
       width: 12.5vw;
-      margin-left: 5vw;
-      
+    }
+    label{
+      margin-left: 2vw;
+    }
+    p{
+      position: absolute;
+      font: 4vh Arial Black;
+      margin-left: 30vw;
+      margin-top: 40vh;
+      User-select: none;
+      animation: flash 4s ease-in-out alternate infinite;
+    }
+    @keyframes flash{
+      from{opacity: 100}
+      to{opacity: 0}
     }
   </style>
   <body>
@@ -50,6 +63,7 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
         <source src = "music.mp3" type="audio/mpeg"> 
     </audio>
     <button class = "button" onClick = "startSort()">Start</button>
+    <label>Algorithm: </label>
     <select class = "list" id = "algorithm">
       <option value="1">Bubble Sort</option>
       <option value="2">Selection Sort</option>
@@ -57,8 +71,11 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
       <option value="4">Insertion Sort</option>
       <option value="5">Merge Sort</option>
     </select>
+    <label>Entities: </label>
     <input class = "text" value = "100" type="text" id="bars" name="bars" autocomplete="off">
+    <label>Speed: </label>
     <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
+    <p id = "prompt">Choose Your Settings<br>and select start</p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
     <script src="script.js"></script>
   </body>

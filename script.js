@@ -30,6 +30,7 @@ let modes = {
 }
 
 async function startSort() {
+  document.getElementById("prompt").style.display = "none"
   if (ready == true) {
     ready = false
     mode = document.getElementById("algorithm").value
