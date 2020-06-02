@@ -38,12 +38,12 @@ let modes = {
   3: quickSort,
   4: insertionSort,
   5: mergeSort,
-  //6: heapSort,
-  //7: bucketSort,
-  //8: cycleSort,
-  //9: radixSort,
-  //10: combSort,
-  //11: monkeySort
+  6: heapSort,
+  7: bucketSort,
+  8: cycleSort,
+  9: radixSort,
+  10: combSort,
+  11: monkeySort
 }
 
 async function startSort() {
@@ -58,9 +58,7 @@ async function startSort() {
       arr.push(new bar)
       function bar() {
         this.color = "black"
-        this.y = window.innerHeight
         this.height = Math.round(Math.random()*(window.innerHeight - compensate)+minHeight);
-        this.width = barWidth;
       }
     }
     setTimeout(function(){start = true}, pauseTime)
@@ -82,6 +80,12 @@ function setup(){
   noStroke();
   createCanvas(window.innerWidth, window.innerHeight);
 }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  barWidth = windowWidth/arrlength
+  compensate = window.innerHeight*0.1
+  minHeight = 50 * (window.innerHeight/1000)
+}
 function draw(){
   speed = document.getElementById("myRange").value
   background("white");
@@ -93,7 +97,7 @@ function draw(){
       p.color = (color += 200/arrlength)
     }
     fill(p.color);
-    rect(x, p.y - p.height - 35, p.width, p.height);
+    rect(x, windowHeight - p.height - 35, barWidth, p.height);
     x += barWidth
   }
   if (start == true){
@@ -188,6 +192,28 @@ async function mergeSort() {
   setTimeout(function(){checkOn = true}, pauseTime)
 }
 async function heapSort() {
+  alert("Not Ready Yet")
+  setTimeout(function(){checkOn = true}, pauseTime)
+}
+async function bucketSort() {
+  alert("Not Ready Yet")
+  setTimeout(function(){checkOn = true}, pauseTime)
+}
+async function cycleSort() {
+  alert("Not Ready Yet")
+  setTimeout(function(){checkOn = true}, pauseTime)
+}
+async function radixSort() {
+  alert("Not Ready Yet")
+  setTimeout(function(){checkOn = true}, pauseTime)
+}
+async function combSort() {
+  alert("Not Ready Yet")
+  setTimeout(function(){checkOn = true}, pauseTime)
+}
+async function monkeySort() {
+  alert("Not Ready Yet")
+  setTimeout(function(){checkOn = true}, pauseTime)
 }
 
 
@@ -208,12 +234,10 @@ async function swap(a, b){
 }
 
 async function check() {
-  if (arrlength <= 100){
-    for (let i = 0; i < arr.length; i++){
-      arr[i].color = "green"
-      await sleep(speed/arrlength)
-      arr[i].color = "black"
-    }
+  for (let i = 0; i < arr.length; i++){
+    arr[i].color = "green"
+    await sleep(speed/arrlength)
+    arr[i].color = "black"
   }
   ready = true
 }
