@@ -25,10 +25,11 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
       user-select: none;
     }
     .button{
+      font: 3vh 'arial black';
       height: 5vh;
       width: 15vw;
     }
-    .bottun:hover{
+    .botton:hover{
       cursor: pointer;
     }
     .list{
@@ -44,10 +45,11 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
       width: 12.5vw;
     }
     label{
+      font: 2vh 'arial black';
       margin-left: 2vw;
     }
     p{
-      font: 4vh Arial Black;
+      font: 4vh 'arial black';
       margin-top: 40vh;
       animation: flash 4s ease-in-out alternate infinite;
     }
@@ -60,7 +62,7 @@ Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
     <audio id = "music" loop>
         <source src = "music.mp3" type="audio/mpeg"> 
     </audio>
-    <button class = "button" onClick = "startSort()">Start</button>
+    <button class = "button" height = "5vh" onClick = "startSort()">Start</button>
     <label>Algorithm: </label>
     <select class = "list" id = "algorithm">
       <option value="1">Bubble Sort</option>

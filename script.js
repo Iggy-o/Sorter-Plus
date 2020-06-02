@@ -15,6 +15,7 @@ let arr = []
 let start, checkOn = false
 let ready = true
 let pauseTime = 1000
+let compensate = window.innerHeight*0.05 + 10
 let modes = {
   1: bubbleSort,
   2: selectionSort,
@@ -42,7 +43,7 @@ async function startSort() {
       function bar() {
         this.color = "black"
         this.y = window.innerHeight
-        this.height = Math.round(Math.random()*window.innerHeight);
+        this.height = Math.round(Math.random()*(window.innerHeight - compensate)+2);
         this.width = barWidth;
       }
     }
@@ -68,7 +69,7 @@ function draw(){
       p.color = (color += 200/arrlength)
     }
     fill(p.color);
-    rect(x, p.y - p.height, p.width, p.height);
+    rect(x, p.y - p.height - compensate, p.width, p.height);
     x += barWidth
   }
   if (start == true){
