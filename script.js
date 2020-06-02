@@ -1,9 +1,9 @@
 /*
 Ighoise Odigie
-May, 28 2020
+June 1, 2020
 Youtube: https://www.youtube.com/channel/UCud4cJjtCjEwKpynPz-nNaQ?
 Github: https://github.com/Iggy-o
-Preview: https://repl.it/@IghoiseO/Confetti-Party#index.html
+Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 */
 
 //These are global variables that must be initialized
@@ -160,7 +160,6 @@ async function mergeSort() {
   setTimeout(function(){checkOn = true}, pauseTime)
 }
 async function heapSort() {
-
 }
 
 
@@ -181,10 +180,12 @@ async function swap(a, b){
 }
 
 async function check() {
-  for (let i = 0; i < arr.length; i++){
-    arr[i].color = "green"
-    await sleep(speed/100)
-    arr[i].color = "black"
+  if (arrlength <= 100){
+    for (let i = 0; i < arr.length; i++){
+      arr[i].color = "green"
+      await sleep(speed/arrlength)
+      arr[i].color = "black"
+    }
   }
   ready = true
 }
