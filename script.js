@@ -254,23 +254,18 @@ async function heapSort() {
   check();
 }
 async function bucketSort() {
-  alert("Not Ready Yet")
   check();
 }
 async function cycleSort() {
-  alert("Not Ready Yet")
   check();
 }
 async function radixSort() {
-  alert("Not Ready Yet")
   check();
 }
 async function combSort() {
-  alert("Not Ready Yet")
   check();
 }
 async function monkeySort() {
-  alert("Not Ready Yet")
   check();
 }
 
@@ -301,10 +296,17 @@ async function swap(a, b){
 let pauseTime = 1000;
 async function check() {
   await sleep(pauseTime);
-  for (let i = 0; i < arr.length; i++){
-    arr[i].color = "green";
-    await sleep(speed/arrlength);
-    arr[i].color = "black";
+  let prev = arr[0].height
+  for (let i = 1; i < arr.length; i++){
+    if (arr[i].height > prev){
+      arr[i].color = "green";
+      prev = arr[i].height
+      await sleep(speed/arrlength);
+      arr[i].color = "black";
+    }
+    else{
+      arr[i].color = "red"
+    }
   }
   inputReady = true;
 }
