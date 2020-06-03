@@ -10,6 +10,11 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 let titleOn = true;
 window.onclick = function() {
   if (titleOn === true) {
+    //This code manages the audio
+    audio = document.getElementById("music");
+    audio.volume = 0.25;
+    audio.play();
+    //
     titleOn = false;
     prompt = document.getElementById("prompt");
     prompt.style.fontSize = "4vh";
@@ -19,14 +24,7 @@ window.onclick = function() {
     randomize();
   }
 }
-
-//This function manages the audio
-audio();
-function audio() {
-  audio = document.getElementById("music")
-  audio.play();
-  audio.volume = 0.25;
-}
+  
 
 //These are variables that must be initialized globally
 let speed, mode, arrlength, barWidth;
