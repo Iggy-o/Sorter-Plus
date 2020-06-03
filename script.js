@@ -13,7 +13,7 @@ window.onclick = function() {
   if (titleOn === true) {
     //This code manages the audio
     audio = document.getElementById("music");
-    audio.volume = 0.25;
+    audio.volume = 0.025;
     audio.play();
     //
     titleOn = false;
@@ -48,16 +48,18 @@ let modes = {
 }
 
 //This is the function called by HTML elements to start the sort
-let hintOn = true
-let hintTime = 2000
-let compensate = window.innerHeight*0.1
-let minHeight = 50 * (window.innerHeight/1000)
+let hintOn = true;
+let hintTime = 2000;
+let compensate = window.innerHeight*0.1;
+let minHeight = 50 * (window.innerHeight/1000);
+let comparisons = 0;
 
 async function startSort() {
   if (inputReady == true) {
     document.getElementById("button").style.animationIterationCount = "0"
     mode = document.getElementById("algorithm").value
     sortStart = true
+    comparisons = 0
     if(randomized == false){
       randomize()
     }
@@ -107,11 +109,14 @@ function draw(){
   let color = 0;
   for(let i = 0; i < arr.length; i++){
     let p = arr[i];
-    if ((p.color) != "green" && (p.color) != "red"){
+    if ((p.color) != "green" && (p.color) != "red" && (p.color) != "purple"){
       p.color = (color += 200/arrlength);
     }
     fill(p.color);
     rect(x, windowHeight - p.height - 35, barWidth, p.height);
+    fill("black");
+    textSize(windowHeight*0.025)
+    text(`Comparisons: ${comparisons}`, windowWidth/2-windowHeight*0.03, windowHeight*0.05)
     x += barWidth;
   }
   if (sortStart == true){
@@ -124,6 +129,7 @@ function draw(){
 async function bubbleSort() {
   for (let j = 0; j < arr.length; j++) {
     for(let k = 0; k < arr.length - 1 - j; k++){
+      await comparison(k, k + 1);
       if (arr[k].height > arr[k+1].height) {
         await swap(k, k + 1); 
       }
@@ -136,6 +142,7 @@ async function selectionSort() {
     max = arr[0].height
     maxPos = 0
     for(let k = 0; k < arr.length - j; k++){
+      await comparison(k, maxPos);
       if (arr[k].height > max) {
         max = arr[k].height
         maxPos = k
@@ -145,19 +152,22 @@ async function selectionSort() {
   }
   check();
 }
+//May have speed issue
 async function quickSort() {
   await quickSorting(0, arr.length - 1)
   async function quickSorting(start, end) {
     if (start >= end) {
       return
     }
+    await comparison(start, end);
     let index = await partition(start, end)
-    await quickSorting(start, index-1)
+    await quickSorting(start, index - 1)
     await quickSorting(index + 1, end)
     async function partition(start, end){
       let pivotIndex = start
       let pivot = arr[end].height
       for (let i = start; i < end; i++){
+        await comparison(i, pivotIndex);
         if (arr[i].height < pivot){
           await swap(i, pivotIndex)
           pivotIndex += 1
@@ -172,25 +182,31 @@ async function quickSort() {
 async function insertionSort() {
   for (let j = 0; j < arr.length - 1; j++) {
     for (let k = j; k >= 0; k--){
+      await comparison(k, k + 1);
       if (arr[k + 1].height < arr[k].height){
         await swap(k + 1, k)
+      }else{
+        break
       }
     }
   }
   check();
 }
+//Merge Broken
+//Has speed issues
 async function mergeSort() {
-  await mergeSorting(0, arr.length + 1)
+  await mergeSorting(0, arr.length - 1)
   async function mergeSorting(start, end) {
     if(start < end) {
+      await comparison(start, end);
       mid = Math.floor((start + end)/2)
       await mergeSorting(start, mid)
       await mergeSorting(mid + 1, end)
-
-      await merge(start, mid, end)
-      async function merge(start, mid, end) {
+      await merge(start, mid)
+      async function merge(start, mid) {
         for (let i = start; i < mid; i++) {
           for (let j = start; j < mid; j++) {
+            await comparison(start + (j - start), mid + (i - mid));
             if (arr[start + (j - start)].height > arr[mid + (i - mid)].height){
               await swap(start + (j - start), mid + (i - mid))
             }
@@ -218,12 +234,17 @@ async function heapSort() {
     let leftNode = parentNode*2 + 1
     let rightNode = parentNode*2 + 2
     let maxNode = parentNode;
-
-    if ((leftNode <= n) && (arr[leftNode].height > arr[maxNode].height)){
-      maxNode = leftNode
+    if (leftNode <= n){
+      await comparison(leftNode, maxNode);
+      if(arr[leftNode].height > arr[maxNode].height){
+        maxNode = leftNode
+      }
     }
-    if((rightNode <= n) && (arr[rightNode].height > arr[maxNode].height)){
-      maxNode = rightNode
+    if(rightNode <= n) {
+      await comparison(rightNode, maxNode);
+      if (arr[rightNode].height > arr[maxNode].height){
+        maxNode = rightNode
+      }
     }
     if (maxNode > parentNode) {
       await swap(parentNode, maxNode)
@@ -258,17 +279,25 @@ async function monkeySort() {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-async function swap(a, b){
-  arr[a].color = "green";
-  arr[b].color = "red";
+async function comparison(a, b){
+  comparisons += 1
+  arr[a].color = "purple";
+  arr[b].color = "purple";
   await sleep(speed);
-  let temp = arr[a];
-  arr[a]= arr[b];
-  arr[b]= temp;
   arr[a].color = "black";
   arr[b].color = "black";
 }
-
+async function swap(a, b){
+  arr[a].color = "green";
+  arr[b].color = "red";
+  await sleep(speed/2);
+  let temp = arr[a];
+  arr[a]= arr[b];
+  arr[b]= temp;
+  await sleep(speed/2)
+  arr[a].color = "black";
+  arr[b].color = "black";
+}
 let pauseTime = 1000;
 async function check() {
   await sleep(pauseTime);
