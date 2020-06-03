@@ -1,6 +1,7 @@
 /*
 Ighoise Odigie
 June 1, 2020
+#Made Within a Week
 Youtube: https://www.youtube.com/channel/UCud4cJjtCjEwKpynPz-nNaQ?
 Github: https://github.com/Iggy-o
 Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
@@ -48,6 +49,7 @@ let modes = {
 
 //This is the function called by HTML elements to start the sort
 let hintOn = true
+let hintTime = 2000
 let compensate = window.innerHeight*0.1
 let minHeight = 50 * (window.innerHeight/1000)
 
@@ -67,7 +69,7 @@ async function startSort() {
     document.getElementById("prompt").style.display = "inline-block";
     setTimeout(function(){
       document.getElementById("prompt").style.display = "none";
-    }, 5000)
+    }, hintTime)
   }
 }
 function randomize() {
@@ -127,7 +129,7 @@ async function bubbleSort() {
       }
     }
   }
-  check()
+  check();
 }
 async function selectionSort() {
   for (let j = 0; j < arr.length; j++) {
@@ -141,7 +143,7 @@ async function selectionSort() {
     }
     await swap(maxPos, arr.length-j-1)
   }
-  check()
+  check();
 }
 async function quickSort() {
   await quickSorting(0, arr.length - 1)
@@ -165,7 +167,7 @@ async function quickSort() {
       return pivotIndex
     }
   }
-  check()
+  check();
 }
 async function insertionSort() {
   for (let j = 0; j < arr.length - 1; j++) {
@@ -175,7 +177,7 @@ async function insertionSort() {
       }
     }
   }
-  check()
+  check();
 }
 async function mergeSort() {
   await mergeSorting(0, arr.length + 1)
@@ -197,31 +199,58 @@ async function mergeSort() {
       }
     }
   }
-  check()
+  check();
 }
 async function heapSort() {
-  alert("Not Ready Yet")
-  check()
+  let n = arr.length - 1
+  await bubble()
+  async function bubble() {
+    for(let parentNode = n; parentNode >= 0; parentNode--) {
+      await drown(parentNode)
+    }
+    while (n >= 0) {
+      await swap(0, n)
+      n--
+      await drown(0)
+    }
+  }
+  async function drown(parentNode) {
+    let leftNode = parentNode*2 + 1
+    let rightNode = parentNode*2 + 2
+    let maxNode = parentNode;
+
+    if ((leftNode <= n) && (arr[leftNode].height > arr[maxNode].height)){
+      maxNode = leftNode
+    }
+    if((rightNode <= n) && (arr[rightNode].height > arr[maxNode].height)){
+      maxNode = rightNode
+    }
+    if (maxNode > parentNode) {
+      await swap(parentNode, maxNode)
+      await drown(maxNode)
+    }
+  }
+  check();
 }
 async function bucketSort() {
   alert("Not Ready Yet")
-  check()
+  check();
 }
 async function cycleSort() {
   alert("Not Ready Yet")
-  check()
+  check();
 }
 async function radixSort() {
   alert("Not Ready Yet")
-  check()
+  check();
 }
 async function combSort() {
   alert("Not Ready Yet")
-  check()
+  check();
 }
 async function monkeySort() {
   alert("Not Ready Yet")
-  check()
+  check();
 }
 
 
