@@ -97,6 +97,8 @@ function randomize() {
 function setup(){
   noStroke();
   createCanvas(window.innerWidth, window.innerHeight);
+  sortedSound = document.getElementById("sorted");
+  sortedSound.volume = 0.5;
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -401,5 +403,6 @@ async function check() {
       arr[i].color = "red"
     }
   }
+  sortedSound.play()
   inputReady = true;
 }
