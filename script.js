@@ -53,6 +53,7 @@ let hintTime = 2000;
 let compensate = window.innerHeight*0.1;
 let minHeight = 50 * (window.innerHeight/1000);
 let comparisons = 0;
+let swaps = 0;
 
 async function startSort() {
   if (inputReady == true) {
@@ -60,6 +61,7 @@ async function startSort() {
     mode = document.getElementById("algorithm").value
     sortStart = true
     comparisons = 0
+    swaps = 0
     if(randomized == false){
       randomize()
     }
@@ -114,10 +116,11 @@ function draw(){
     }
     fill(p.color);
     rect(x, windowHeight - p.height - 35, barWidth, p.height);
+    x += barWidth;
     fill("black");
     textSize(windowHeight*0.025)
-    text(`Comparisons: ${comparisons}`, windowWidth/2-windowHeight*0.03, windowHeight*0.05)
-    x += barWidth;
+    text(`Comparisons: ${comparisons}`, windowWidth/2+windowHeight*0.03, windowHeight*0.05)
+    text(`Swaps: ${swaps}`, windowWidth/2-(windowHeight*0.03)*4, windowHeight*0.05)
   }
   if (sortStart == true){
     modes[mode]();
@@ -141,7 +144,7 @@ async function selectionSort() {
   for (let j = 0; j < arr.length; j++) {
     max = arr[0].height
     maxPos = 0
-    for(let k = 0; k < arr.length - j; k++){
+    for(let k = 1; k < arr.length - j; k++){
       await comparison(k, maxPos);
       if (arr[k].height > max) {
         max = arr[k].height
@@ -195,10 +198,12 @@ async function insertionSort() {
 //Merge Broken
 //Has speed issues
 async function mergeSort() {
-  await mergeSorting(0, arr.length - 1)
+  await mergeSorting(0, arr.length + 1)
   async function mergeSorting(start, end) {
     if(start < end) {
-      await comparison(start, end);
+      if(end < arr.length) {
+        await comparison(start, end);
+      }
       mid = Math.floor((start + end)/2)
       await mergeSorting(start, mid)
       await mergeSorting(mid + 1, end)
@@ -259,13 +264,94 @@ async function bucketSort() {
 async function cycleSort() {
   check();
 }
+//Major Issues Decomissioned
 async function radixSort() {
+  let max = arr[0].height
+  let maxPos = 0
+  for(let k = 1; k < arr.length; k++){
+    await comparison(k, maxPos);
+    if (arr[k].height > max) {
+      max = arr[k].height
+      maxPos = k
+    }
+  }
+  for (let value = 1; value <= max; value*=10) {
+    let countArr = []
+    let auxArr = []
+    let digit;
+    for (let i = 0; i < 10; i++) {
+      countArr[i] = 0
+    }
+    for (let i = 0; i <= arr.length-1; i++) {
+      digit = await simplify(arr[i].height, value)
+      countArr[digit] = countArr[digit] + 1
+      console.log(arr[i].height)
+    }
+    console.log(countArr)
+    countArr[0]--
+    for (let i = 1; i < 10; i++) {
+      countArr[i]+=countArr[i-1]
+    }
+    console.log(countArr)
+    for (let i = arr.length - 1; i >= 0; i--) {
+      digit = await simplify(arr[i].height, value)
+      auxArr[i] = countArr[digit]      
+      countArr[digit] = countArr[digit] - 1
+    }
+    console.log('aux', auxArr)
+
+    /*for (let g = 0; g<2; g++) {
+      let i = 0; 
+      while (i < arr.length) {
+        if (auxArr[i] != i) {
+          await swap(auxArr[i], i)
+        }
+        i++
+      }
+    }*/
+  }
+  function simplify(number, value) {
+    return Math.floor(number%(value*10)/value)
+  }
   check();
 }
 async function combSort() {
+  for (let gap = arr.length - 1; gap > 0; gap--) {
+    for (let i = 0; i + gap < arr.length; i++) {
+      await comparison(i, i + gap)
+      if (arr[i].height > arr[i + gap].height) {
+        await swap(i, i + gap)
+      }
+    }
+  }
   check();
 }
 async function monkeySort() {
+  let i = 0
+  while(i<1){
+   let num1 = Math.round(Math.random()*(arr.length-1))
+   let num2 = Math.round(Math.random()*(arr.length-1))
+   if(num1 == num2){
+     if (num2 > Math.round(arr.length/2)){
+       num2--
+     }
+     else{
+       num2++
+     }
+   }
+   await swap(num1, num2)
+   let prev = arr[0].height
+   let dobreak = true
+   for (let b = 1; b<arr.length;b++){
+     if (arr[b].height < prev){
+        dobreak = false
+     }
+     prev = arr[b].height
+   }
+   if (dobreak == true){
+     i = 1
+   }
+  }
   check();
 }
 
@@ -283,6 +369,7 @@ async function comparison(a, b){
   arr[b].color = "black";
 }
 async function swap(a, b){
+  swaps += 1
   arr[a].color = "green";
   arr[b].color = "red";
   await sleep(speed/2);
@@ -298,7 +385,7 @@ async function check() {
   await sleep(pauseTime);
   let prev = arr[0].height
   for (let i = 1; i < arr.length; i++){
-    if (arr[i].height > prev){
+    if (arr[i].height >= prev){
       arr[i].color = "green";
       prev = arr[i].height
       await sleep(speed/arrlength);
