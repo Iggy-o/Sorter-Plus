@@ -8,102 +8,189 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Sorter Plus</title>
-  </head>
-  <style>
-    body{
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      outline: none;
-      text-align: center;
-      user-select: none;
-    }
-    #container{
-      display: none;
-    }
-    .button{
-      margin-top: 2vh;
-      font: 2vw 'arial black';
-      height: 5vh;
-      width: 15vw;
-      outline: none;
-      animation: flicker 0.5s alternate infinite;
-    }
-    @keyframes flicker{
-      from{
-        transform: scale(1);
-        opacity: 0.5;
-      }
-      to{
-        transform: scale(1.2);
-        opacity: 1;
-      }
-    }
-    .button:hover, 
-    .list:hover, 
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=range]::-webkit-slider-thumb
-    {
-      user-select: none;
-      cursor: pointer;
-      animation-play-state: paused;
-    }
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button {  
-      opacity: 1;
-      width: 2vw;
-      height: 4vw;
-      transform: scaleX(1.5);
-    }
-    .list{
-      height: 5vh;
-      width: 20vw;
-      font: 2vw 'arial black';
-    }
-    .text{
-      color: transparent;
-      text-shadow: 0 0 0 #000000;
-      height: 4vh;
-      width: 8vw;
-      font: 2vw 'arial black';
-      user-select: none;
-    }
-    .slider{
-      transform: translateY(0.5vh);
-      width: 12.5vw;
-      direction: rtl;
-    }
-    label{
-      font: 2vw 'arial black';
-      margin-left: 2vw;
-    }
-    p{
-      background: white;
-      font: 10vh 'arial black';
-      margin-top: 35vh;
-    }
-    small{
-      font: 2vh 'arial black';
-      animation: flash 1s ease-in-out alternate infinite;
-    }
-    @keyframes flash{
-      from{opacity: 100}
-      to{opacity: 0}
-    }
-  </style>
-  <body>
-    <audio id = "music" volume = "100" loop>
-      <source src = "sound/im_yours_forever.mp3" type="audio/mpeg"> 
-    </audio>
-    <audio id = "sorted" volume = "100">
-      <source src = "sound/notify.wav" type="audio/wav"> 
-    </audio>
-    <section id = "container">
-      <button class = "button" id = "button" height = "5vh" onClick = "startSort()">START</button>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Sorter Plus</title>
+</head>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		outline: none;
+		text-align: center;
+		user-select: none;
+	}
+
+	.loader {
+		background-color: transparent;
+		position: absolute;
+		width: 150px;
+		height: 150px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: auto;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+	}
+
+	.dot1,
+	.dot2,
+	.dot3,
+	.dot4 {
+		background-color: black;
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		opacity: 0.25;
+	}
+
+	.dot1 {
+		left: 25px;
+		animation: fade 1s ease-in-out alternate infinite;
+	}
+
+
+	.dot2 {
+		left: 50px;
+		animation: fade 1s .25s ease-in-out alternate infinite;
+	}
+
+
+	.dot3 {
+		left: 75px;
+		animation: fade 1s .5s ease-in-out alternate infinite;
+	}
+
+
+	.dot4 {
+		left: 100px;
+		animation: fade 1s .75s ease-in-out alternate infinite;
+	}
+
+
+	@keyframes fade {
+		0% {
+			transform: scale(1);
+			opacity: 0.25;
+		}
+		100% {
+			transform: scale(2);
+			opacity: 1;
+		}
+	}
+
+	#container {
+		display: none;
+	}
+
+	.button {
+		margin-top: 2vh;
+		font: 2vw 'arial black';
+		height: 5vh;
+		width: 15vw;
+		outline: none;
+		animation: flicker 0.5s alternate infinite;
+	}
+
+	@keyframes flicker {
+		from {
+			transform: scale(1);
+			opacity: 0.5;
+		}
+		to {
+			transform: scale(1.2);
+			opacity: 1;
+		}
+	}
+
+	.button:hover,
+	.list:hover,
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=range]::-webkit-slider-thumb {
+		user-select: none;
+		cursor: pointer;
+		animation-play-state: paused;
+	}
+
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		opacity: 1;
+		width: 2vw;
+		height: 4vw;
+		transform: scaleX(1.5);
+	}
+
+	.list {
+		height: 5vh;
+		width: 20vw;
+		font: 2vw 'arial black';
+	}
+
+	.text {
+		color: transparent;
+		text-shadow: 0 0 0 #000000;
+		height: 4vh;
+		width: 8vw;
+		font: 2vw 'arial black';
+		user-select: none;
+	}
+
+	.slider {
+		transform: translateY(0.5vh);
+		width: 12.5vw;
+		direction: rtl;
+    outline: none;
+	}
+
+	label {
+		font: 2vw 'arial black';
+		margin-left: 2vw;
+	}
+
+	p {
+		background: white;
+		font: 10vh 'arial black';
+		margin-top: 35vh;
+		display: none;
+	}
+
+	small {
+		font: 2vh 'arial black';
+		animation: flash 1s ease-in-out alternate infinite;
+	}
+
+	@keyframes flash {
+		from {
+			opacity: 100
+		}
+		to {
+			opacity: 0
+		}
+	}
+</style>
+
+<body>
+	<div class="loader" id="loader">
+		<div class="dot1"></div>
+		<div class="dot2"></div>
+		<div class="dot3"></div>
+		<div class="dot4"></div>
+	</div>
+	<audio id="music" preload = "auto" loop>
+		<source src="sound/im_yours_forever.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sorted" preload = "auto">
+		<source src="sound/notify.mp3" type="audio/mpeg">
+	</audio>
+	<section id="container">
+		<button class = "button" id = "button" height = "5vh" onClick = "startSort()">START</button>
       <label>Algorithm: </label>
       <select class = "list" id = "algorithm">
         <option value="1">Bubble Sort</option>
@@ -119,12 +206,23 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         <option value="11">Monkey Sort</option>
       </select>
       <label>Entities: </label>
-      <input class = "text" step = "5" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "100" min = "5"  onChange = "randomize()" onKeyDown = "return false">
+      <input class = "text" step = "2" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "100" min = "4"  onChange = "randomize()" onKeyDown = "return false">
       <label>Speed: </label>
       <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
     </section>
     <p id = "prompt">Sorting<br>Algorithms<br><small>(Click to continue)</small></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
-    <script src="script.js"></script>
+    <script src="src/algorithms/bubbleSort.js"></script>
+    <script src="src/algorithms/selectionSort.js"></script>
+    <script src="src/algorithms/quickSort.js"></script>
+    <script src="src/algorithms/insertionSort.js"></script>
+    <script src="src/algorithms/mergeSort.js"></script>
+    <script src="src/algorithms/heapSort.js"></script>
+    <script src="src/algorithms/bucketSort.js"></script>
+    <script src="src/algorithms/cycleSort.js"></script>
+    <script src="src/algorithms/radixSort.js"></script>
+    <script src="src/algorithms/combSort.js"></script>
+    <script src="src/algorithms/monkeySort.js"></script>
+    <script src="src/update.js"></script>
   </body>
 </html>
