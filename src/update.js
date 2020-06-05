@@ -22,7 +22,7 @@ window.onclick = function() {
   if (titleOn === true) {
     //This code manages the audio
     audio = document.getElementById("music");
-    audio.volume = 1;
+    audio.volume = 0.5;
     audio.play();
     //
     titleOn = false;
@@ -35,7 +35,7 @@ window.onclick = function() {
 }
 
 //These are variables that must be initialized globally
-let speed, mode, arrlength, barWidth;
+let speed, mode, arrlength, barWidth, validateValue, validateMax, validateMin;
 let arr = [];
 let sortStart = false
 let inputReady = true
@@ -86,6 +86,17 @@ async function startSort() {
 function randomize() {
   if (inputReady == true) {
     randomized = true
+    validateValue = document.getElementById("bars").value;
+    validateMax = parseInt(document.getElementById("bars").max);
+    validateMin = parseInt(document.getElementById("bars").min);
+    if (validateValue < validateMin) {
+      document.getElementById("bars").value = validateMin;
+    }
+    else if (validateValue > validateMax) {
+      console.log(validateValue, validateMax)
+      document.getElementById("bars").value = validateMax;
+    }
+    
     arrlength = document.getElementById("bars").value;
     barWidth = window.innerWidth/arrlength;
     arr = [];
@@ -105,8 +116,7 @@ function setup(){
   noStroke();
   createCanvas(window.innerWidth, window.innerHeight);
   sortedSound = document.getElementById("sorted");
-  sortedSound.volume = 0.25;
-  sortedSound.currentTime = "0.1"
+  sortedSound.volume = 0.25
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -128,9 +138,9 @@ function draw(){
     rect(x, windowHeight - p.height - 35, barWidth, p.height);
     x += barWidth;
     fill("black");
+    textAlign(CENTER)
     textSize(windowHeight*0.025)
-    text(`Comparisons: ${comparisons}`, windowWidth/2+windowHeight*0.03, windowHeight*0.05)
-    text(`Swaps: ${swaps}`, windowWidth/2-(windowHeight*0.03)*4, windowHeight*0.05)
+    text(`Swaps: ${swaps} | Comparisons: ${comparisons}`, windowWidth/2, windowHeight*0.05)
   }
   if (sortStart == true){
     modes[mode]();
@@ -177,6 +187,10 @@ async function check() {
       arr[i].color = "red"
     }
   }
+  audio.volume = 0.1;
   sortedSound.play()
+  sortedSound.addEventListener("ended", function(){
+     audio.volume = 0.5;
+  });
   inputReady = true;
 }

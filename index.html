@@ -112,8 +112,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 
 	.button:hover,
 	.list:hover,
-	input[type=number]::-webkit-inner-spin-button,
-	input[type=range]::-webkit-slider-thumb {
+  .slider{
 		user-select: none;
 		cursor: pointer;
 		animation-play-state: paused;
@@ -121,10 +120,8 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 
 	input[type=number]::-webkit-inner-spin-button,
 	input[type=number]::-webkit-outer-spin-button {
-		opacity: 1;
-		width: 2vw;
-		height: 4vw;
-		transform: scaleX(1.5);
+		-webkit-appearance: none;
+    margin: 0;
 	}
 
 	.list {
@@ -134,20 +131,35 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 	}
 
 	.text {
-		color: transparent;
-		text-shadow: 0 0 0 #000000;
+		user-select: none;
 		height: 4vh;
-		width: 8vw;
+		width: 4vw;
 		font: 2vw 'arial black';
 		user-select: none;
 	}
 
 	.slider {
-		transform: translateY(0.5vh);
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    height: 2vh; 
+    background: white;
+    border: 1px solid black;
+    border-radius: 10vh;
 		width: 12.5vw;
 		direction: rtl;
     outline: none;
 	}
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 4vh; 
+    height: 4vh; 
+    background: black;
+    border-radius: 100%;
+    cursor: pointer;
+  }
 
 	label {
 		font: 2vw 'arial black';
@@ -206,9 +218,9 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         <option value="11">Monkey Sort</option>
       </select>
       <label>Entities: </label>
-      <input class = "text" step = "2" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "100" min = "4"  onChange = "randomize()" onKeyDown = "return false">
+      <input class = "text" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "100" min = "4"  onChange = "randomize()">
       <label>Speed: </label>
-      <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
+      <input class = "slider" type="range" min="0" max="2000" step = "1" value="500" class="slider" id="myRange">
     </section>
     <p id = "prompt">Sorting<br>Algorithms<br><small>(Click to continue)</small></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
