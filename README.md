@@ -6,5 +6,5 @@
 ![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)
 
 
-<img src="assets/preview.gif" alt="preview" height = "250px">
+<img src="assets/images/preview.gif" alt="preview" height = "250px">
 
