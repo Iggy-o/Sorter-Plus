@@ -1,57 +1,31 @@
-//Major Issues Decomissioned
 async function radixSort() {
-  let max = arr[0].height
-  let maxPos = 0
-  for(let k = 1; k < arr.length; k++){
-    await comparison(k, maxPos);
-    if (arr[k].height > max) {
-      max = arr[k].height
-      maxPos = k
-    }
-  }
-  for (let value = 1; value <= max; value*=10) {
-    let countArr = []
-    let auxArr = []
-    let digit;
-    for (let i = 0; i < 10; i++) {
-      countArr[i] = 0
-    }
-    for (let i = 0; i <= arr.length-1; i++) {
-      digit = await simplify(arr[i].height, value)
-      countArr[digit] = countArr[digit] + 1
-      //console.log(arr[i].height)
-    }
-    //console.log(countArr)
-    countArr[0]--
-    for (let i = 1; i < 10; i++) {
-      countArr[i]+=countArr[i-1]
-    }
-    //console.log(countArr)
-    for (let i = arr.length - 1; i >= 0; i--) {
-      digit = await simplify(arr[i].height, value)
-      auxArr[i] = countArr[digit]      
-      countArr[digit] = countArr[digit] - 1
-    }
-    //console.log('aux', auxArr)
+  //The max height is initialized as 1 but as the program runs the real max height is found
+  let max = 1
 
-    let i = 0;
-    let last = arr.length - 1 
-    while (i < arr.length + 1) {
-      if (auxArr[last] != last) {
-        await swap(auxArr[last], last)
-        temp = auxArr[last]
-        auxArr[last] = auxArr[auxArr[last]]
-        auxArr[auxArr[last]] = temp
-        i++
-      }
-      else {
-        console.log("down")
-        last--
+  //Each placevalue is looped through and the bars are placed in the appropriate section
+  for (let placeValue = 1; placeValue <= max; placeValue*=10) {
+    let pos = 0;
+    for (let currentDigit = 0; currentDigit < 10; currentDigit++) {
+      if (pos == arr.length) break;
+      for (let i = 0; i < arr.length; i++) {
+        //The bars are swapped into a digit based formation
+        await comparison(i, pos);
+        if (arr[i].height > max && placeValue == 1) max = arr[i].height;
+        if (Math.floor(arr[i].height%(placeValue*10)/placeValue) == currentDigit) {
+          if (i != pos) { 
+            await swap(i, pos);
+            //After a swap the previous formation must be fixed
+            for (let inc = ++pos; inc < i; inc++) {
+              await swap(i, inc);
+            }
+          }
+          else {
+            pos++;
+          }
+        }
       }
     }
   }
-  function simplify(number, value) {
-    return Math.floor(number%(value*10)/value)
-  }
+
   check();
 }

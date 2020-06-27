@@ -37,14 +37,13 @@ window.onclick = function() {
 //These are variables that must be initialized globally
 let speed, mode, arrlength, barWidth, validateValue, validateMax, validateMin;
 let arr = [];
-let sortStart = false
-let inputReady = true
-let randomized = false
+let sortStart = false;
+let inputReady = true;
+let randomized = false;
 let modes = {
   1: bubbleSort, 2: selectionSort, 3: quickSort,
   4: insertionSort, 5: mergeSort, 6: heapSort,
-  7: bucketSort, 8: cycleSort, 9: radixSort,
-  10: combSort, 11: monkeySort
+  7: bucketSort, 8: radixSort, 9: combSort, 10: monkeySort
 }
 
 //This is the function called by HTML elements to start the sort
@@ -86,7 +85,7 @@ function randomize() {
       document.getElementById("bars").value = validateMin;
     }
     else if (validateValue > validateMax) {
-      console.log(validateValue, validateMax)
+      //console.log(validateValue, validateMax)
       document.getElementById("bars").value = validateMax;
     }
     
@@ -169,7 +168,7 @@ let pauseTime = 1000;
 async function check() {
   await sleep(pauseTime);
   let prev = arr[0].height
-  for (let i = 1; i < arr.length; i++){
+  for (let i = 0; i < arr.length; i++){
     if (arr[i].height >= prev){
       arr[i].color = "green";
       prev = arr[i].height
