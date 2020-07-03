@@ -8,203 +8,212 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 
 <!DOCTYPE html>
 <html>
+  <head>
+    <!--Define MetaData-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Sorting Visualization">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Ighoise Odigie">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Page Title-->
+    <title>Sorter Plus</title>
+    <!--Favicon Link-->
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon" sizes="16x16">
+    <!--Importing the p5 library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+  </head>
+  <!--Styling-->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      outline: none;
+      text-align: center;
+      user-select: none;
+    }
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Sorter Plus</title>
-  <!--Page Favicon Link-->
-  <link rel="icon" href="assets/images/favicon.png" type="image/x-icon" sizes="16x16">
-</head>
-<style>
-	body {
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		outline: none;
-		text-align: center;
-		user-select: none;
-	}
+    .loader {
+      background-color: transparent;
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
 
-	.loader {
-		background-color: transparent;
-		position: absolute;
-		width: 150px;
-		height: 150px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: auto;
-		top: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
-	}
+    .dot1,
+    .dot2,
+    .dot3,
+    .dot4 {
+      background-color: black;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0.25;
+    }
 
-	.dot1,
-	.dot2,
-	.dot3,
-	.dot4 {
-		background-color: black;
-		position: absolute;
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		opacity: 0.25;
-	}
-
-	.dot1 {
-		left: 25px;
-		animation: fade 1s ease-in-out alternate infinite;
-	}
-
-
-	.dot2 {
-		left: 50px;
-		animation: fade 1s .25s ease-in-out alternate infinite;
-	}
-
-
-	.dot3 {
-		left: 75px;
-		animation: fade 1s .5s ease-in-out alternate infinite;
-	}
+    .dot1 {
+      left: 25px;
+      animation: fade 1s ease-in-out alternate infinite;
+    }
 
 
-	.dot4 {
-		left: 100px;
-		animation: fade 1s .75s ease-in-out alternate infinite;
-	}
+    .dot2 {
+      left: 50px;
+      animation: fade 1s .25s ease-in-out alternate infinite;
+    }
 
 
-	@keyframes fade {
-		0% {
-			transform: scale(1);
-			opacity: 0.25;
-		}
-		100% {
-			transform: scale(2);
-			opacity: 1;
-		}
-	}
+    .dot3 {
+      left: 75px;
+      animation: fade 1s .5s ease-in-out alternate infinite;
+    }
 
-	#container {
-		display: none;
-	}
 
-	.button {
-		margin-top: 2vh;
-		font: 2vw 'arial black';
-		height: 5vh;
-		width: 15vw;
-		outline: none;
-		animation: flicker 0.5s alternate infinite;
-	}
+    .dot4 {
+      left: 100px;
+      animation: fade 1s .75s ease-in-out alternate infinite;
+    }
 
-	@keyframes flicker {
-		from {
-			transform: scale(1);
-			opacity: 0.5;
-		}
-		to {
-			transform: scale(1.2);
-			opacity: 1;
-		}
-	}
 
-	.button:hover,
-	.list:hover,
-  .slider{
-		user-select: none;
-		cursor: pointer;
-		animation-play-state: paused;
-	}
+    @keyframes fade {
+      0% {
+        transform: scale(1);
+        opacity: 0.25;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 1;
+      }
+    }
 
-	input[type=number]::-webkit-inner-spin-button,
-	input[type=number]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-    margin: 0;
-	}
+    #container {
+      display: none;
+    }
 
-	.list {
-		height: 5vh;
-		width: 20vw;
-		font: 2vw 'arial black';
-	}
+    .button {
+      margin-top: 2vh;
+      font: 2vh 'arial black';
+      height: 5vh;
+      width: 15vw;
+      outline: none;
+      animation: flicker 0.5s alternate infinite;
+    }
 
-	.text {
-		user-select: none;
-		height: 4vh;
-		width: 4vw;
-		font: 2vw 'arial black';
-		user-select: none;
-	}
+    @keyframes flicker {
+      from {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      to {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
 
-	.slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    width: 100%;
-    height: 2vh; 
-    background: white;
-    border: 1px solid black;
-    border-radius: 10vh;
-		width: 12.5vw;
-		direction: rtl;
-    outline: none;
-	}
+    .button:hover,
+    .list:hover,
+    .slider{
+      user-select: none;
+      cursor: pointer;
+      animation-play-state: paused;
+    }
 
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 4vh; 
-    height: 4vh; 
-    background: black;
-    border-radius: 100%;
-    cursor: pointer;
-  }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
-	label {
-		font: 2vw 'arial black';
-		margin-left: 2vw;
-	}
+    .list {
+      margin-top: 5vh;
+      height: 5vh;
+      width: 20vw;
+      font: 2vh 'arial black';
+    }
 
-	p {
-		background: white;
-		font: 10vh 'arial black';
-		margin-top: 35vh;
-		display: none;
-	}
+    .text {
+      user-select: none;
+      height: 4vh;
+      width: 4vw;
+      font: 2vw 'arial black';
+      user-select: none;
+    }
 
-	small {
-		font: 2vh 'arial black';
-		animation: flash 1s ease-in-out alternate infinite;
-	}
+    .slider {
+      -webkit-appearance: none;  /* Override default CSS styles */
+      appearance: none;
+      width: 100%;
+      height: 2vh; 
+      background: white;
+      border: 1px solid black;
+      border-radius: 10vh;
+      width: 12.5vw;
+      direction: rtl;
+      outline: none;
+    }
 
-	@keyframes flash {
-		from {
-			opacity: 100
-		}
-		to {
-			opacity: 0
-		}
-	}
-</style>
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      width: 4vh; 
+      height: 4vh; 
+      background: black;
+      border-radius: 100%;
+      cursor: pointer;
+    }
 
-<body>
-	<div class="loader" id="loader">
-		<div class="dot1"></div>
-		<div class="dot2"></div>
-		<div class="dot3"></div>
-		<div class="dot4"></div>
-	</div>
-	<audio id="music" preload = "auto" loop>
-		<source src="assets/sound/im_yours_forever.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sorted" preload = "auto">
-		<source src="assets/sound/notify.mp3" type="audio/mpeg">
-	</audio>
-	<section id="container">
-		<button class = "button" id = "button" height = "5vh" onClick = "startSort()">START</button>
+    label {
+      font: 2vw 'arial black';
+      margin-left: 2vw;
+    }
+
+    p {
+      background: white;
+      font: 10vh 'arial black';
+      margin-top: 35vh;
+      display: none;
+    }
+
+    small {
+      font: 2vh 'arial black';
+      animation: flash 1s ease-in-out alternate infinite;
+    }
+
+    @keyframes flash {
+      from {
+        opacity: 100;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+  <!--Body-->
+  <body>
+    <div class="loader" id="loader">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+      <div class="dot3"></div>
+      <div class="dot4"></div>
+    </div>
+    <audio id="music" preload = "auto" loop>
+      <source src="assets/sound/im_yours_forever.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sorted" preload = "auto">
+      <source src="assets/sound/notify.mp3" type="audio/mpeg">
+    </audio>
+    <section id="container">
+      <button class = "button" id = "button" height = "5vh" onClick = "startSort()">START</button>
       <label>Algorithm: </label>
       <select class = "list" id = "algorithm">
         <option value="1">Bubble Sort</option>
@@ -219,22 +228,25 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         <option value="10">Monkey Sort</option>
       </select>
       <label>Entities: </label>
-      <input class = "text" value = "10" type="number" id="bars" name="bars" autocomplete="off" max = "250" min = "2"  onChange = "randomize()">
+      <input class = "text" value = "50" type="number" id="bars" name="bars" autocomplete="off" max = "250" min = "2"  onChange = "randomize()">
       <label>Speed: </label>
       <input class = "slider" type="range" min="0" max="2000" step = "1" value="500" class="slider" id="myRange">
     </section>
     <p id = "prompt">Sorting<br>Algorithms<br><small>(Click to continue)</small></p>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
-    <script src="src/algorithms/bubbleSort.js"></script>
-    <script src="src/algorithms/selectionSort.js"></script>
-    <script src="src/algorithms/quickSort.js"></script>
-    <script src="src/algorithms/insertionSort.js"></script>
-    <script src="src/algorithms/mergeSort.js"></script>
-    <script src="src/algorithms/heapSort.js"></script>
-    <script src="src/algorithms/bucketSort.js"></script>
-    <script src="src/algorithms/radixSort.js"></script>
-    <script src="src/algorithms/combSort.js"></script>
-    <script src="src/algorithms/monkeySort.js"></script>
-    <script src="src/update.js"></script>
   </body>
+  <!--Script Links-->
+  <script src="src/algorithms/bubbleSort.js"></script>
+  <script src="src/algorithms/selectionSort.js"></script>
+  <script src="src/algorithms/quickSort.js"></script>
+  <script src="src/algorithms/insertionSort.js"></script>
+  <script src="src/algorithms/mergeSort.js"></script>
+  <script src="src/algorithms/heapSort.js"></script>
+  <script src="src/algorithms/bucketSort.js"></script>
+  <script src="src/algorithms/radixSort.js"></script>
+  <script src="src/algorithms/combSort.js"></script>
+  <script src="src/algorithms/monkeySort.js"></script>
+  <script src="src/interface/update.js"></script>
+  <script src="src/interface/visualization.js"></script>
+  <script src="src/interface/startup.js"></script>
+  <script src="src/interface/interact.js"></script>
 </html>
