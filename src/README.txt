@@ -6,4 +6,4 @@ The interface folder is home to the code that allows the user to interact with t
 
 Thanks for checking this out :)
 
-- Ighoise 2020
+- Ighoise June 2020

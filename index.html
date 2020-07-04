@@ -32,6 +32,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
       outline: none;
       text-align: center;
       user-select: none;
+      background-color: white;
     }
 
     .loader {
@@ -94,6 +95,10 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         transform: scale(2);
         opacity: 1;
       }
+    }
+
+    #prompt:hover {
+      cursor: pointer;
     }
 
     #container {
@@ -206,6 +211,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
       <div class="dot3"></div>
       <div class="dot4"></div>
     </div>
+    <p id = "prompt">Sorting<br>Algorithms<br><small>(Click to continue)</small></p>
     <audio id="music" preload = "auto" loop>
       <source src="assets/sound/im_yours_forever.mp3" type="audio/mpeg">
     </audio>
@@ -213,7 +219,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
       <source src="assets/sound/notify.mp3" type="audio/mpeg">
     </audio>
     <section id="container">
-      <button class = "button" id = "button" height = "5vh" onClick = "startSort()">START</button>
+      <button class = "button" id = "button" height = "5vh" onClick = "array.startSort()">START</button>
       <label>Algorithm: </label>
       <select class = "list" id = "algorithm">
         <option value="1">Bubble Sort</option>
@@ -228,11 +234,10 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
         <option value="10">Monkey Sort</option>
       </select>
       <label>Entities: </label>
-      <input class = "text" value = "50" type="number" id="bars" name="bars" autocomplete="off" max = "250" min = "2"  onChange = "randomize()">
+      <input class = "text" value = "50" type="number" id="bars" name="bars" autocomplete="off" max = "250" min = "2"  onChange = "new array">
       <label>Speed: </label>
-      <input class = "slider" type="range" min="0" max="2000" step = "1" value="500" class="slider" id="myRange">
+      <input class = "slider" type="range" min="0" max="1000" step = "1" value="500" class="slider" id="myRange">
     </section>
-    <p id = "prompt">Sorting<br>Algorithms<br><small>(Click to continue)</small></p>
   </body>
   <!--Script Links-->
   <script src="src/algorithms/bubbleSort.js"></script>

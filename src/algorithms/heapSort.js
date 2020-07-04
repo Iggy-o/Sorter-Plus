@@ -24,7 +24,7 @@ async function heapSort() {
   //The heap is created using a for loop
   for(let parentNode = n; parentNode >= 0; parentNode--) {
     //If the user stops the sort than return ASAP
-    if (isStopped == true) {stopSort(); return}
+    if (sortStop == true) {array.stopSort(); return}
     //The currentNode is swapped if it is smaller than its children
     await drown(parentNode)
   }
@@ -32,9 +32,9 @@ async function heapSort() {
   //and the array is resorted
   while (n >= 0) {
     //If the user stops the sort than return ASAP
-    if (isStopped == true) {stopSort(); return}
+    if (sortStop == true) {array.stopSort(); return}
     //The first element (position 0) is swapped to the end
-    await swap(0, n)
+    await visual.swap(0, n)
     //That element is removed from concern
     n--
     //The array is reorganized
@@ -43,7 +43,7 @@ async function heapSort() {
   //This function pushes the parentNode down if it is smaller than its children
   async function drown(parentNode) {
     //If the user stops the sort than return ASAP
-    if (isStopped == true) return
+    if (sortStop == true) return
     //The leftNode is found with this formula
     let leftNode = parentNode*2 + 1
     //The rightNode is found with this formula
@@ -53,7 +53,7 @@ async function heapSort() {
     //If the leftNode is smaller than array's length 
     //and greater than the largest node, it is now the maxNode
     if (leftNode <= n){
-      await comparison(leftNode, maxNode);
+      await visual.comparison(leftNode, maxNode);
       if(arr[leftNode].height > arr[maxNode].height){
         maxNode = leftNode
       }
@@ -61,7 +61,7 @@ async function heapSort() {
     //If the rightNode is smaller than array's length 
     //and greater than the largest node, it is now the maxNode
     if(rightNode <= n) {
-      await comparison(rightNode, maxNode);
+      await visual.comparison(rightNode, maxNode);
       if (arr[rightNode].height > arr[maxNode].height){
         maxNode = rightNode
       }
@@ -69,11 +69,11 @@ async function heapSort() {
     //If the maxNode is not the parentNode 
     //than swap the parentNode with the largest found node
     if (maxNode > parentNode) {
-      await swap(parentNode, maxNode)
+      await visual.swap(parentNode, maxNode)
       await drown(maxNode)
     }
   }
 
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

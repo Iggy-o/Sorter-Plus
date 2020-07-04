@@ -15,15 +15,15 @@ async function bubbleSort() {
     //Moving from left to right each bar is compared to its right neighbour
     for(let k = 0; k < arr.length - 1 - j; k++){
       //If the user stops the sort than return ASAP
-      if (isStopped == true) {stopSort(); return}
+      if (sortStop == true) {array.stopSort(); return}
       //The current bar is swapped if the right bar is bigger
-      await comparison(k, k + 1);
+      await visual.comparison(k, k + 1);
       if (arr[k].height > arr[k+1].height) {
-        await swap(k, k + 1); 
+        await visual.swap(k, k + 1); 
       }
     }
   }
 
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

@@ -9,14 +9,14 @@ which all smaller values are placed to the left of and all larger values are pla
 async function quickSort() {
   await quickSorting(0, arr.length - 1);
   //If the user stops the sort than return ASAP
-  if (isStopped == true) {stopSort(); return}
+  if (sortStop == true) {array.stopSort(); return}
   //This function sorts the array recursively
   async function quickSorting(start, end) {
     //If the user stops the sort than return ASAP
-    if (isStopped == true) return
+    if (sortStop == true) return
     //If the start is smaller or equal to the end continue
     if (start < end) {
-      await comparison(start, end);
+      await visual.comparison(start, end);
       //The index is set to the returned value from sortByPivot
       let pivotIndex = await sortByPivot(start, end);
       async function sortByPivot(start, end) {
@@ -27,11 +27,11 @@ async function quickSort() {
         //The array is checked for any bars smaller than the pivot
         for (let i = start; i <= end; i++) {
           //If the user stops the sort than return ASAP
-          if (isStopped == true) return
+          if (sortStop == true) return
           //If i is smaller than the pivot, swap them
-          await comparison(i, pivotIndex);
+          await visual.comparison(i, pivotIndex);
           if (arr[i].height < pivot) {
-            await swap(i, pivotIndex);
+            await visual.swap(i, pivotIndex);
             //The pivots position is tracked with pivotPos
             if (pivotIndex == pivotPos) {
               pivotPos = i;
@@ -41,7 +41,7 @@ async function quickSort() {
           }
         }
         //The pivot is swapped to the end and its position is returned
-        await swap(pivotIndex, pivotPos);
+        await visual.swap(pivotIndex, pivotPos);
         return pivotIndex;
       }
       //The array is split into two and the process is repeated
@@ -51,5 +51,5 @@ async function quickSort() {
   }
   
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

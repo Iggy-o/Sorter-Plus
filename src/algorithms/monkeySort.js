@@ -21,7 +21,7 @@ async function monkeySort() {
       else num2++
     }
     //The two random bars are ready to be swapped
-    await swap(num1, num2);
+    await visual.swap(num1, num2);
     //If the array is sorted, the swapping can be discontinued
     //The previous bar is saved for reference
     let prev = arr[0].height;
@@ -31,7 +31,7 @@ async function monkeySort() {
     //Every bar in the array is checked
     for (let b = 1; b < arr.length; b++){
       //If the user stops the sort than return ASAP
-      if (isStopped == true) {stopSort(); return}
+      if (sortStop == true) {array.stopSort(); return}
       //If two bars are not in correct order, isNotDone remains true
       if (arr[b].height < prev){isNotDone = true; break;}
       //The previous bar is changed to the current bar
@@ -40,5 +40,5 @@ async function monkeySort() {
   }
 
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

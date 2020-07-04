@@ -18,16 +18,16 @@ async function bucketSort() {
     //The array is searched for bars matching the current digit
     for(let array = 0; array < arr.length; array++) {
       //If the user stops the sort than return ASAP
-      if (isStopped == true) {stopSort(); return}
+      if (sortStop == true) {array.stopSort(); return}
       //If the bar matches the current digit it is put at the end
       //of its digit's heap
-      await comparison(array, pos);
+      await visual.comparison(array, pos);
       if (Math.floor(arr[array].height%(digitSize*10)/digitSize) == currentDigit) {
         if (array != pos) { 
-          await swap(array, pos);
+          await visual.swap(array, pos);
           //After a swap the previous formation must be maintained
           for (let inc = ++pos; inc < array; inc++) {
-            await swap(array, inc);
+            await viusal.swap(array, inc);
           }
         }
         else pos++;
@@ -40,11 +40,11 @@ async function bucketSort() {
     //The current bar is checked with every neighbour to the left
     for (let k = j; k >= 0; k--){
       //If the user stops the sort than return ASAP
-      if (isStopped == true) {stopSort(); return}
+      if (sortStop == true) {stopSort(); return}
       //If the bar is smaller than its left neighbour, than it is swapped
-      await comparison(k, k + 1);
+      await visual.comparison(k, k + 1);
       if (arr[k + 1].height < arr[k].height){
-        await swap(k + 1, k)
+        await visual.swap(k + 1, k)
       //Otherwise, the positioning process is complete
       }else{
         break
@@ -53,5 +53,5 @@ async function bucketSort() {
   }
 
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

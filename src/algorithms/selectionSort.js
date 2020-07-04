@@ -16,18 +16,18 @@ async function selectionSort() {
     //The array is looped through in search of the largest value
     for(let k = 1; k < arr.length - j; k++){
       //If the user stops the sort than return ASAP
-      if (isStopped == true) {stopSort(); return}
+      if (sortStop == true) {array.stopSort(); return}
       //Each value is compared to max value and if they are greater, the max is chenged to its value
-      await comparison(k, maxPos);
+      await visual.comparison(k, maxPos);
       if (arr[k].height > max) {
         max = arr[k].height
         maxPos = k
       }
     }
     //At this point the max value has been located and its position is swapped to the end
-    await swap(maxPos, arr.length-j-1)
+    await visual.swap(maxPos, arr.length-j-1)
   }
 
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

@@ -16,15 +16,15 @@ async function combSort() {
     //The bars are checked until the second bar value is invalid
     for (let i = 0; i + gap < arr.length; i++) {
       //If the user stops the sort than return ASAP
-      if (isStopped == true) {stopSort(); return}
+      if (sortStop == true) {array.stopSort(); return}
       //If the first bar is smaller than the second, they are swapped
-      await comparison(i, i + gap)
+      await visual.comparison(i, i + gap)
       if (arr[i].height > arr[i + gap].height) {
-        await swap(i, i + gap)
+        await visual.swap(i, i + gap)
       }
     }
   }
   
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }

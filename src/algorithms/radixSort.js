@@ -21,19 +21,19 @@ async function radixSort() {
       //The array is searched for bars matching the current digit
       for (let i = 0; i < arr.length; i++) {
         //If the user stops the sort than return ASAP
-        if (isStopped == true) {stopSort(); return}
+        if (sortStop == true) {array.stopSort(); return}
         //As the array is looped through the max height is 
         //saved for later use 
         if (arr[i].height > max && placeValue == 1 && currentDigit == 0) max = arr[i].height;
         //If the bar matches the current digit it is put at the end
         //of its digit's heap
-        await comparison(i, pos);
+        await visual.comparison(i, pos);
         if (Math.floor(arr[i].height%(placeValue*10)/placeValue) == currentDigit) {
           if (i != pos) { 
-            await swap(i, pos);
+            await visual.swap(i, pos);
             //After a swap the previous formation must be maintained
             for (let inc = ++pos; inc < i; inc++) {
-              await swap(i, inc);
+              await visual.swap(i, inc);
             }
           }
           else pos++;
@@ -43,5 +43,5 @@ async function radixSort() {
   }
 
   //Once the array is sorted the results are checked to ensure accuracy
-  check();
+  visual.check();
 }
