@@ -26,11 +26,11 @@ async function mergeSort() {
       //The two sorted halves are merged into one bigger array
       await merge(start, mid, end);
       async function merge(start, mid, end) {
-        //If the user stops the sort than return ASAP
-        if (sortStop == true) return
         //Each bar from the first half is compared
         //with the associated bar from the second half
         for (let i = start; i < mid + 1; i++) {
+          //If the user stops the sort than return ASAP
+          if (sortStop == true) return
           //If the bar from the first half is smaller than the
           //associated bar from the second half, they are swapped
           await visual.comparison(i, mid + 1);
@@ -39,6 +39,8 @@ async function mergeSort() {
             //After the two bars are swapped
             //The second half must be reorganized
             for (let j = mid + 1; j < end; j++) {
+              //If the user stops the sort than return ASAP
+              if (sortStop == true) return
               await visual.comparison(j, j + 1)
               if (arr[j].height > arr[j + 1].height) {
                 await visual.swap(j, j + 1);
