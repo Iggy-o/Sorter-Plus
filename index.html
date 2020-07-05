@@ -8,6 +8,7 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
 
 <!DOCTYPE html>
 <html>
+  <!--Document Head-->
   <head>
     <!--Define MetaData-->
     <meta charset="utf-8">
@@ -22,187 +23,187 @@ Preview: https://repl.it/@IghoiseO/Sorter-Plus#script.js
     <link rel="icon" href="assets/images/favicon.png" type="image/x-icon" sizes="16x16">
     <!--Importing the p5 library-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
-  </head>
-  <!--Styling-->
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      outline: none;
-      text-align: center;
-      user-select: none;
-      background-color: white;
-    }
+    <!--Styling-->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        outline: none;
+        text-align: center;
+        user-select: none;
+        background-color: white;
+      }
 
-    .loader {
-      background-color: transparent;
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-    }
+      .loader {
+        background-color: transparent;
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+      }
 
-    .dot1,
-    .dot2,
-    .dot3,
-    .dot4 {
-      background-color: black;
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      opacity: 0.25;
-    }
-
-    .dot1 {
-      left: 25px;
-      animation: fade 1s ease-in-out alternate infinite;
-    }
-
-
-    .dot2 {
-      left: 50px;
-      animation: fade 1s .25s ease-in-out alternate infinite;
-    }
-
-
-    .dot3 {
-      left: 75px;
-      animation: fade 1s .5s ease-in-out alternate infinite;
-    }
-
-
-    .dot4 {
-      left: 100px;
-      animation: fade 1s .75s ease-in-out alternate infinite;
-    }
-
-
-    @keyframes fade {
-      0% {
-        transform: scale(1);
+      .dot1,
+      .dot2,
+      .dot3,
+      .dot4 {
+        background-color: black;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
         opacity: 0.25;
       }
-      100% {
-        transform: scale(2);
-        opacity: 1;
+
+      .dot1 {
+        left: 25px;
+        animation: fade 1s ease-in-out alternate infinite;
       }
-    }
 
-    #prompt:hover {
-      cursor: pointer;
-    }
 
-    #container {
-      display: none;
-    }
-
-    .button {
-      margin-top: 2vh;
-      font: 2vh 'arial black';
-      height: 5vh;
-      width: 15vw;
-      outline: none;
-      animation: flicker 0.5s alternate infinite;
-    }
-
-    @keyframes flicker {
-      from {
-        transform: scale(1);
-        opacity: 0.5;
+      .dot2 {
+        left: 50px;
+        animation: fade 1s .25s ease-in-out alternate infinite;
       }
-      to {
-        transform: scale(1.2);
-        opacity: 1;
+
+
+      .dot3 {
+        left: 75px;
+        animation: fade 1s .5s ease-in-out alternate infinite;
       }
-    }
 
-    .button:hover,
-    .list:hover,
-    .slider{
-      user-select: none;
-      cursor: pointer;
-      animation-play-state: paused;
-    }
 
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    .list {
-      margin-top: 5vh;
-      height: 5vh;
-      width: 20vw;
-      font: 2vh 'arial black';
-    }
-
-    .text {
-      user-select: none;
-      height: 4vh;
-      width: 4vw;
-      font: 2vw 'arial black';
-      user-select: none;
-    }
-
-    .slider {
-      -webkit-appearance: none;  /* Override default CSS styles */
-      appearance: none;
-      width: 100%;
-      height: 2vh; 
-      background: white;
-      border: 1px solid black;
-      border-radius: 10vh;
-      width: 12.5vw;
-      direction: rtl;
-      outline: none;
-    }
-
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none; /* Override default look */
-      appearance: none;
-      width: 4vh; 
-      height: 4vh; 
-      background: black;
-      border-radius: 100%;
-      cursor: pointer;
-    }
-
-    label {
-      font: 2vw 'arial black';
-      margin-left: 2vw;
-    }
-
-    p {
-      background: white;
-      font: 10vh 'arial black';
-      margin-top: 35vh;
-      display: none;
-    }
-
-    small {
-      font: 2vh 'arial black';
-      animation: flash 1s ease-in-out alternate infinite;
-    }
-
-    @keyframes flash {
-      from {
-        opacity: 100;
+      .dot4 {
+        left: 100px;
+        animation: fade 1s .75s ease-in-out alternate infinite;
       }
-      to {
-        opacity: 0;
+
+
+      @keyframes fade {
+        0% {
+          transform: scale(1);
+          opacity: 0.25;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 1;
+        }
       }
-    }
-  </style>
+
+      #prompt:hover {
+        cursor: pointer;
+      }
+
+      #container {
+        display: none;
+      }
+
+      .button {
+        margin-top: 2vh;
+        font: 2vh 'arial black';
+        height: 5vh;
+        width: 15vw;
+        outline: none;
+        animation: flicker 0.5s alternate infinite;
+      }
+
+      @keyframes flicker {
+        from {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        to {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      .button:hover,
+      .list:hover,
+      .slider{
+        user-select: none;
+        cursor: pointer;
+        animation-play-state: paused;
+      }
+
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .list {
+        margin-top: 5vh;
+        height: 5vh;
+        width: 20vw;
+        font: 2vh 'arial black';
+      }
+
+      .text {
+        user-select: none;
+        height: 4vh;
+        width: 4vw;
+        font: 2vw 'arial black';
+        user-select: none;
+      }
+
+      .slider {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%;
+        height: 2vh; 
+        background: white;
+        border: 1px solid black;
+        border-radius: 10vh;
+        width: 12.5vw;
+        direction: rtl;
+        outline: none;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 4vh; 
+        height: 4vh; 
+        background: black;
+        border-radius: 100%;
+        cursor: pointer;
+      }
+
+      label {
+        font: 2vw 'arial black';
+        margin-left: 2vw;
+      }
+
+      p {
+        background: white;
+        font: 10vh 'arial black';
+        margin-top: 35vh;
+        display: none;
+      }
+
+      small {
+        font: 2vh 'arial black';
+        animation: flash 1s ease-in-out alternate infinite;
+      }
+
+      @keyframes flash {
+        from {
+          opacity: 100;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
   <!--Body-->
   <body>
     <div class="loader" id="loader">
