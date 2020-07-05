@@ -1,6 +1,8 @@
 # Sorter-Plus
 
-### A sorting algorithm viualization
+> 10 popular sorting algorithms\
+visualized for anyone to understand\
+and admire
 
 [![License](https://img.shields.io/badge/Quick-Preview-brightgreen)](https://repl.it/@IghoiseO/Sorter-Plus)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Iggy-o/Sorter-Plus/blob/v1.0.0/LICENSE)
