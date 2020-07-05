@@ -59,7 +59,7 @@ class visual {
   //The "sorted" array is checked for errors
   static async check() {
     //Wait 1.5 seconds before the check begins
-    await visual.sleep(1500);
+    await visual.sleep(1000);
     //Store the previously checked bar in this variable
     let prev = arr[0].height
     //Loop through and check for any bars that are not in order
