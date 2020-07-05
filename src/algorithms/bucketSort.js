@@ -23,14 +23,8 @@ async function bucketSort() {
       //of its digit's heap
       await visual.comparison(i, pos);
       if (Math.floor(arr[i].height%(digitSize*10)/digitSize) == currentDigit) {
-        if (i != pos) { 
-          await visual.swap(i, pos);
-          //After a swap the previous formation must be maintained
-          for (let inc = ++pos; inc < i; inc++) {
-            await visual.swap(i, inc);
-          }
-        }
-        else pos++;
+        if (i != pos) await visual.swap(i, pos);
+        pos++;
       }
     }
   }
