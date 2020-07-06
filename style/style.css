@@ -1,6 +1,6 @@
 /*Importing the styling for all the HTML elements
 into this main css file*/
-@import "loader.css";
-@import "prompt.css";
-@import "ui.css";
+@import "fragments/loader.css";
+@import "fragments/prompt.css";
+@import "fragments/ui.css";
       
