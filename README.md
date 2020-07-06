@@ -17,8 +17,8 @@ data and for producing human-readable output." (Wikipedia)\
 
 ## Worst Case Time Complexity
 
-Where "n" is equal to the number of sortable items, in the worst
-case scenario it will take "x" amount of time for the list of items
+Where "n" is equal to the number of sortable items, in the worst<br>
+case scenario it will take "x" amount of time for the list of items<br>
 to be sorted, where "x" equals:
 
 - BubbleSort => O(n^2)
