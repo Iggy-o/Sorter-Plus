@@ -1,0 +1,34 @@
+/*Removing default off the body and aligning child elements*/
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  outline: none;
+  text-align: center;
+  user-select: none;
+  background-color: white;
+}
+/*The user prompt should have a visual cursor to indicate its clickable
+and the "CLick to continue" notice is given a flashing animation to 
+grab attention*/
+#prompt:hover {
+  cursor: pointer;
+}
+#prompt {
+  background: white;
+  font: 10vh 'arial black';
+  margin-top: 35vh;
+  display: none;
+}
+small {
+  font: 2vh 'arial black';
+  animation: flash 1s ease-in-out alternate infinite;
+}
+@keyframes flash {
+  from {
+    opacity: 100;
+  }
+  to {
+    opacity: 0;
+  }
+}

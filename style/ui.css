@@ -1,0 +1,73 @@
+/*The button is positioned in the top-left and animated*/
+.button {
+  margin-top: 2vh;
+  font: 2vh 'arial black';
+  height: 5vh;
+  width: 15vw;
+  outline: none;
+  animation: flicker 0.5s alternate infinite;
+}
+@keyframes flicker {
+  from {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+/*On hover all UI elements should indicate clicking and 
+their default blue highlighting is turned off*/
+.button:hover,
+.list:hover,
+.slider{
+  user-select: none;
+  cursor: pointer;
+  animation-play-state: paused;
+}
+/*The algorithm menu is positioned*/
+.list {
+  margin-top: 5vh;
+  height: 5vh;
+  width: 20vw;
+  font: 2vh 'arial black';
+}
+/*The user number input is positioned & the number box's spinners are hidden*/
+.text {
+  user-select: none;
+  height: 4vh;
+  width: 4vw;
+  font: 2vw 'arial black';
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/*The slider's default style is overrided for a custom style*/
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2vh; 
+  background: white;
+  border: 1px solid black;
+  border-radius: 10vh;
+  width: 12.5vw;
+  direction: rtl;
+  outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 4vh; 
+  height: 4vh; 
+  background: black;
+  border-radius: 100%;
+  cursor: pointer;
+}
+/*The UI element descriotion text is positioned*/
+label {
+  font: 2vw 'arial black';
+  margin-left: 2vw;
+}
