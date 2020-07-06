@@ -23,7 +23,7 @@ class visual {
         //Set the color to black and the alignment to centered
         fill("black"); textAlign(CENTER);
         //Draw the stats text with the above qualities
-        text(`Swaps: ${swaps} | Comparisons: ${comparisons}`, windowWidth/2, windowHeight*0.05);
+        text(`Array Accesses: ${swaps} | Comparisons: ${comparisons}`, windowWidth/2, windowHeight*0.05);
       }
     }
   }
