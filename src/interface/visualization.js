@@ -90,5 +90,7 @@ class visual {
     button.innerHTML = "START";
   }
   //This function allows me to pause the program for said amount of seconds
-  static sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  static sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }
