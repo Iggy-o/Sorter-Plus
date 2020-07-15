@@ -8,7 +8,7 @@
 
 <img src="assets/images/preview.gif" alt="preview" height = "250px">
 
-## What is a Sorting ALgorithm
+## What is a Sorting Algorithm?
 
 > In computer science, a sorting algorithm is an algorithm that puts elements\
 of a list in a certain order. Sorting is also often useful for canonicalizing\
