@@ -14,7 +14,7 @@
 This visualisation was created in order for me to learn more about the inner workings\
 of sorting algorithms, before this project I had little knowledge of the countless unique ways of\
 sorting objects. Now I thoroughly understand the concept of time complexity, recursive, and efficiency.
-<br>-Ighoise Odigie ||| Inquiries: iodigie03@gmail.com
+<br><br>-Ighoise Odigie ||| Inquiries: iodigie03@gmail.com
 
 ## Worst Case Time Complexity
 
