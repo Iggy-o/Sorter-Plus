@@ -1,6 +1,6 @@
 # Sorter-Plus
 
-### "The most popular <a href = "https://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank" >sorting algorithms</a>visualized"
+### "The most popular <a href = "https://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank" >sorting algorithms</a> visualized"
 
 [![License](https://img.shields.io/badge/Quick-Preview-brightgreen)](https://iggy-o.github.io/Sorter-Plus/)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Iggy-o/Sorter-Plus/blob/v1.0.0/LICENSE)
