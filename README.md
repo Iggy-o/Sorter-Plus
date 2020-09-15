@@ -7,11 +7,12 @@
 
 <img src="assets/images/preview.gif" alt="preview" height = "250px">
 
-*Note from the author:*
->A visualisation of sorting algorithms I made in order\
+>*Note from the author:*\
+<br>A visualisation of sorting algorithms I made in order\
 to learn more about how to efficiently\
 sort a list of items.
 <br><br>-Ighoise Odigie ||| Inquiries: iodigie03@gmail.com
+
 
 ## What is a Sorting Algorithm?
 
