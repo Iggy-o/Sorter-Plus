@@ -11,7 +11,7 @@ window.onload = () => {
 
 //When the user clicks the prompt, it is hidden, the program starts,
 //and music is played
-let audio = document.getElementById("music");
+//let audio = document.getElementById("music");
 let sortedSound = document.getElementById("sorted");
 prompt.addEventListener("click", function(){
   //The startup screen is hidden
@@ -21,9 +21,9 @@ prompt.addEventListener("click", function(){
   //The array of randomized bars are setup
   new array;
   //The audio is downloaded and prepped for play
-  audio.volume = 0;
+  //audio.volume = 0;
   sortedSound.volume = 0.25;
-  audio.play();
+  //audio.play();
 });
 
 //When the button is clicked for the first time the animation is turned off
