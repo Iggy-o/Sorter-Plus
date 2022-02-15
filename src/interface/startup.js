@@ -21,7 +21,7 @@ prompt.addEventListener("click", function(){
   //The array of randomized bars are setup
   new array;
   //The audio is downloaded and prepped for play
-  audio.volume = 0.1;
+  audio.volume = 0;
   sortedSound.volume = 0.25;
   audio.play();
 });
