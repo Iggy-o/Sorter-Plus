@@ -82,9 +82,10 @@ class visual {
   //When the sort is completed a sound is played and user input is allowed
   static sortCompleted() {
     //When the sorting is complete play a sort completed sound
-    audio.volume = 0.1;
+    //let vol = audio.volume;
+    //audio.volume = 0.1;
     sortedSound.play()
-    sortedSound.addEventListener("ended", () => audio.volume = 0.5);
+    //sortedSound.addEventListener("ended", () => vol);
     //Allow the user to start a new sort
     inputReady = true;
     button.innerHTML = "START";
